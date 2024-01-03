@@ -13,7 +13,10 @@ app.use(express.static("public"));
 const usersDB = [
   {
     email: "test@test.com",
-    password: "test123",
+    password: "test",
+    name: "test",
+    gender: "male",
+    age: 32,
   },
 ];
 
@@ -39,6 +42,14 @@ app.get("/", (req, res) => {
   }
 });
 
+app.get("/register", (req, res) => {
+  if (req.cookies.email) {
+    res.redirect("/");
+  } else {
+    res.sendFile(path.join(__dirname, "./public/reg.html"));
+  }
+});
+
 app.post("/login", async (req, res) => {
   // check if user exists in db list
   // if user exists then redirect to home page
@@ -59,6 +70,38 @@ app.post("/login", async (req, res) => {
     res.redirect("/");
   } else {
     res.status(401).send("Invalid Credentials");
+  }
+});
+
+app.post("/register", async (req, res) => {
+  // check if user exists in db list
+  // if user exists then redirect to login page
+  // else redirect to register page
+
+  // get from form
+
+  console.log(req.body);
+
+  const userEmail = req.body.email;
+  const password = req.body.password;
+  const name = req.body.name;
+  const age = req.body.age;
+  const gender = req.body.gender;
+
+  const user = usersDB.find((user) => user.email === userEmail);
+
+  if (user) {
+    res.status(400).send("User already exists");
+  } else {
+    usersDB.push({
+      email: userEmail,
+      password: password,
+      gender: gender,
+      age: age,
+      name: name,
+    });
+
+    res.redirect("/login");
   }
 });
 
