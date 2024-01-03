@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <link rel="stylesheet" href="login2.css" />
+  <body>
+    <header>
+      <h2 class="logo">logo</h2>
+      <nav class="navigation">
+        <a href="page1.html">HOW SLEEP CYCLE WORKS?</a>
+        <a href="contact.html">CONTACT</a>
+        <a href="#">ABOUT SLEEP</a>
+      </nav>
+    </header>
+
+    <div class="wrapper">
+      <div class="login-box">
+        <form action="/login" method="POST">
+          <h2>Login</h2>
+
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="mail"></ion-icon>
+            </span>
+            <input name="email" id="email" type="email" required />
+            <label>Email</label>
+          </div>
+
+          <div class="input-box">
+            <span class="icon">
+              <ion-icon name="lock-closed"></ion-icon>
+            </span>
+            <input name="password" id="password" type="password" required />
+            <label>Password</label>
+          </div>
+
+          <div class="remember-forgot">
+            <label><input type="checkbox" /> Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit">Login</button>
+
+          <div class="register-link">
+            <p>Don't have an account? <a href="#">Register</a></p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

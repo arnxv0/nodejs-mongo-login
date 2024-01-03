@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLEEP TRACKER</title>
+    <style>
+      body {
+        background-image: url("C:/Users/LENOVO/OneDrive/Desktop/html/fsdimg1.jpg");
+        background-size: cover;
+      }
+
+      .container {
+        text-align: center;
+        background-color: bisque;
+        padding: 10px;
+        margin: auto;
+        width: 50%;
+        margin-top: 50px;
+        border-radius: 10px;
+      }
+
+      button {
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="sleepForm">
+      <div class="container">
+        <p><b>Which one are you?</b></p>
+        <input type="radio" id="earlyBird" name="habits" value="Early Bird" />
+        <label for="earlyBird">Early Bird</label>
+        <input type="radio" id="nightOwl" name="habits" value="Night Owl" />
+        <label for="nightOwl">Night Owl</label>
+        <br /><br />
+
+        <label for="sleeptime"><b>What time did you sleep?</b></label>
+        <input type="time" id="sleeptime" name="sleeptime" required />
+        <br /><br />
+
+        <label for="waketime"><b>What time did you get up?</b></label>
+        <input type="time" id="waketime" name="waketime" required />
+        <br /><br />
+
+        <button type="button" onclick="calculateSleepDuration()">
+          How long did I sleep?
+        </button>
+
+        <p id="result"></p>
+      </div>
+    </form>
+
+    <!-- Logout  -->
+    <form action="/logout" method="POST">
+      <div class="container">
+        <button type="submit">Logout</button>
+      </div>
+    </form>
+
+    <script>
+      function calculateSleepDuration() {
+        var sleepTime = document.getElementById("sleeptime").value;
+        var wakeTime = document.getElementById("waketime").value;
+
+        if (sleepTime && wakeTime) {
+          var sleepDate = new Date("2023-01-01 " + sleepTime);
+          var wakeDate = new Date("2023-01-01 " + wakeTime);
+
+          if (wakeDate < sleepDate) {
+            wakeDate.setDate(wakeDate.getDate() + 1);
+          }
+
+          var durationMs = wakeDate - sleepDate;
+          var durationHours = durationMs / (1000 * 60 * 60);
+
+          if (durationHours < 6) {
+            document.getElementById("result").innerHTML =
+              "You are sleep deprived. You slept for " +
+              durationHours.toFixed(2) +
+              " hours.";
+          } else if (durationHours > 9) {
+            document.getElementById("result").innerHTML =
+              "You overslept. You slept for " +
+              durationHours.toFixed(2) +
+              " hours.";
+          } else {
+            document.getElementById("result").innerHTML =
+              "You had a perfect sleep. You slept for " +
+              durationHours.toFixed(2) +
+              " hours.";
+          }
+        } else {
+          document.getElementById("result").innerHTML =
+            "Please enter both sleep and wake times.";
+        }
+      }
+    </script>
+  </body>
+</html>
